@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Contacts</title>
+    <style>
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe6f2; /* Light Pink Background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Contact List Container */
+        .contact-list {
+            background: white;
+            padding: 45px;
+            border-radius: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        /* Title Styling */
+        h2 {
+            color: #ff66b2; /* Dark Pink Title */
+            margin-bottom: 20px;
+        }
+
+        /* Contact Item Styling */
+        .contact-item {
+            background: #ff99cc;
+            color: white;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+
+        /* Empty Message Styling */
+        .empty-message {
+            color: #ff3385;
+            font-style: italic;
+        }
+
+        /* Back Link Styling */
+        .back-link {
+            display: block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #ff3385;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            color: #e60073;
+        }
+
+        /* Back Button Styling */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #ff3385;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #e60073;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back Button -->
+    <a href="sos1.html" class="back-button">⬅ Back</a>
+
+    <div class="contact-list">
+        <h2>Saved Contacts</h2>
+        <div id="contacts">
+            <p class="empty-message">No contacts saved yet.</p>
+        </div>
+        <br>
+        <a href="add.html" class="back-link">Go Back to Add Contact</a>
+    </div>
+
+    <script>
+        function loadContacts() {
+            let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+            let contactsDiv = document.getElementById("contacts");
+            contactsDiv.innerHTML = "";
+
+            if (contacts.length === 0) {
+                contactsDiv.innerHTML = "<p class='empty-message'>No contacts saved yet.</p>";
+                return;
+            }
+
+            contacts.forEach(contact => {
+                let contactItem = document.createElement("div");
+                contactItem.classList.add("contact-item");
+                contactItem.textContent = `📞 ${contact.name} - ${contact.phone}`;
+                contactsDiv.appendChild(contactItem);
+            });
+        }
+
+        window.onload = loadContacts;
+    </script>
+
+</body>
+</html>
+
+
